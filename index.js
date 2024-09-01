@@ -5,11 +5,28 @@ const mongoose = require('mongoose');
 const mailchimp = require('./mailchimp'); // Import your Mailchimp configuration
 const cors = require('cors');
 const app = express();
+
 app.use(express.json());
-app.use(cors({
-  origin: 'https://stoic-application-frontend-himanshus-projects-1bbbfa97.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Correct URL without trailing slash
-}));
+
+// List of allowed origins
+const allowedOrigins = [
+  'https://stoic-application-frontend-himanshus-projects-1bbbfa97.vercel.app',
+  'https://stoic-application-frontend.vercel.app/',
+];
+
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  
+};
+
+app.use(cors(corsOptions));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
