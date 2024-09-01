@@ -7,7 +7,8 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'https://stoic-application-frontend-himanshus-projects-1bbbfa97.vercel.app', // Correct URL without trailing slash
+  origin: 'https://stoic-application-frontend-himanshus-projects-1bbbfa97.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Correct URL without trailing slash
 }));
 
 // MongoDB connection
