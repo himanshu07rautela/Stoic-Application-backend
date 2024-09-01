@@ -7,7 +7,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your React app's URL
+  origin: 'https://stoic-application-frontend.vercel.app/', // Replace with your React app's URL
 }));
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
